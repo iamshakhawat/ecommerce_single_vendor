@@ -40,10 +40,8 @@
         </div>
     </div>
     <!-- banner section end -->
-    </div>
     <!-- banner bg main end -->
     <!-- fashion section start -->
-    <div class="">
         <div class="container">
             <h1 class="fashion_taital">Latest Product</h1>
             <div class="fashion_section_2">
@@ -95,9 +93,7 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="">
         <div class="container">
             <h1 class="fashion_taital">Categories</h1>
             <div class="fashion_section_2">
@@ -128,20 +124,18 @@
                 </div>
             </div>
         </div>
-    </div>
 
 
     @php
         $categories = App\Models\Category::latest('id')->get();
     @endphp
-    <div class="">
         <div class="container">
             @foreach ($categories as $category)
                 <h1 class="fashion_taital">{{ $category->category_name }}</h1>
                 <div class="fashion_section_2">
                     <div class="row">
                         @php
-                            $products = App\Models\Product::where('category_name',$category->category_name)->get();
+                            $products = App\Models\Product::where('category_name', $category->category_name)->get();
                         @endphp
                         @foreach ($products as $product)
                             <div class="col-lg-4 col-sm-4">
@@ -165,8 +159,7 @@
                                             <div>
                                                 <form action="{{ route('addproducttocart') }}" method="POST">
                                                     @csrf
-                                                    <input type="hidden" name="product_id"
-                                                        value="{{ $product->id }}">
+                                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
                                                     <input type="hidden" name="quantity" value="1">
                                                     <button type="submit" class="mr-2"
                                                         style="outline:none;background:none;font-size:15px;color:#e78b00">Buy
@@ -177,8 +170,7 @@
                                             </div>
                                         @endif
 
-                                        <div class="seemore_bt w-25"><a
-                                                href="{{ route('product', $product->slug) }}">See
+                                        <div class="seemore_bt w-25"><a href="{{ route('product', $product->slug) }}">See
                                                 More</a></div>
                                     </div>
                                 </div>
@@ -188,5 +180,4 @@
                 </div>
             @endforeach
         </div>
-    </div>
 @endsection
