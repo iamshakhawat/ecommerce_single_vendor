@@ -81,7 +81,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="logo">
-                            <a href="index.html">
+                            <a href="{{ route('homepage') }}">
                                 <img src="{{ asset('frontend/images/logo.png') }}" />
                             </a>
                         </div>

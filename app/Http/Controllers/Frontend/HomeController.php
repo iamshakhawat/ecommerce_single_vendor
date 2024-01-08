@@ -136,7 +136,7 @@ class HomeController extends Controller
 
     public function OrderHistory()
     {
-        $orders = Order::latest('id')->get();
+        $orders = Order::where('user_id',Auth::id())->latest('id')->get();
         return view('order-history',compact('orders'));
     }
 
