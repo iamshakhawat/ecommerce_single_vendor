@@ -30,7 +30,6 @@
     <!-- Tweaks for older IEs-->
 
     <link rel="stylesheet" href="{{ asset('admin/assets/css/toastr.min.css') }}" />
-
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
     <!-- fonts -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
@@ -41,11 +40,10 @@
     <!-- owl stylesheets -->
     <link href="https://fonts.googleapis.com/css?family=Great+Vibes|Poppins:400,700&display=swap&subset=latin-ext"
         rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
-        media="screen">
-
     <link rel="stylesheet" href="{{ asset('frontend/css/owl.carousel.min.css') }}">
     <link rel="stylesoeet" href="{{ asset('frontend/css/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
+        media="screen">
 </head>
 
 <body>
@@ -60,14 +58,11 @@
                     <div class="col-sm-12">
                         <div class="custom_menu">
                             <ul>
-                                <li><a href="{{ route('homepage') }}">Home</a></li>
-                                @auth
-                                <li><a href="{{ route('cart') }}">Cart</a></li>
-                                <li><a href="{{ route('dashbaord') }}">My Account</a></li>
-                                @else
-                                    <li><a href="{{ route('login') }}">Login</a></li>
-                                    <li><a href="{{ route('register') }}">Register</a></li>
-                                @endauth
+                                <li><a href="#">Best Sellers</a></li>
+                                <li><a href="#">Gift Ideas</a></li>
+                                <li><a href="#">New Releases</a></li>
+                                <li><a href="#">Today's Deals</a></li>
+                                <li><a href="#">Customer Service</a></li>
                             </ul>
                         </div>
                     </div>
@@ -134,10 +129,25 @@
                         </form>
                     </div>
                     <div class="header_box">
+                        <div class="lang_box ">
+                            <a href="#" title="Language" class="nav-link" data-toggle="dropdown"
+                                aria-expanded="true">
+                                <img src="{{ asset('frontend/images/flag-uk.png') }}" alt="flag" class="mr-2 "
+                                    title="United Kingdom"> English
+                                <i class="fa fa-angle-down ml-2" aria-hidden="true"></i>
+                            </a>
+                            <div class="dropdown-menu ">
+                                <a href="#" class="dropdown-item">
+                                    <img src="{{ asset('frontend/images/flag-france.png') }}" class="mr-2"
+                                        alt="">
+                                    French
+                                </a>
+                            </div>
+                        </div>
                         <div class="login_menu">
                             <ul>
                                 @auth
-                                        <li><a href="{{ route('cart') }}">
+                                    <li><a href="{{ route('cart') }}">
                                             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                             <span class="padding_10">Cart</span></a>
                                     </li>
@@ -159,7 +169,132 @@
         </div>
         <!-- header section end -->
 
-        @yield('content')
+        <div class="container">
+            <h2 class="text-center">Checkout</h2>
+            <div class="row p-5 mb-5">
+                <div class="col-md-4 p-2 ">
+                    <div class="box_main">
+                        <style>
+                            table {
+                                width: 100%;
+                            }
+
+                            td {
+                                padding: 5px;
+                                margin-left: 15px;
+                            }
+                        </style>
+                        <div class="d-flex justify-content-between">
+                            <h3>Shipping Details:</h3>
+                            <a href="{{ route('addressbook') }}" style="text-decoration: underline !important">Edit</a>
+                        </div>
+                        <table border="1">
+                            <tr>
+                                <td>Name:</td>
+                                <td>{{ $address[0]->name }}</td>
+                            </tr>
+                            <tr>
+                                <td>Phone:</td>
+                                <td>{{ $address[0]->phone }}</td>
+                            </tr>
+                            <tr>
+                                <td>District:</td>
+                                <td>{{ $address[0]->district }}</td>
+                            </tr>
+                            <tr>
+                                <td>City:</td>
+                                <td>{{ $address[0]->city }}</td>
+                            </tr>
+                            <tr>
+                                <td>Area:</td>
+                                <td>{{ $address[0]->area }}</td>
+                            </tr>
+                            <tr>
+                                <td>Address:</td>
+                                <td>{{ $address[0]->address }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-8 p-2 ">
+                    <div class="box_main">
+                        <h4>Your Products:</h4>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Product Name</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            @php
+                                $price = 0;
+                                $totalproduct = 0;
+                            @endphp
+                            @foreach ($carts as $cart)
+                                @php
+                                    $product = App\Models\Product::find($cart->product_id);
+                                    $price = $price + $cart->price;
+                                    $totalproduct = $totalproduct + $cart->quantity;
+                                @endphp
+                                <tr>
+                                    <td>
+                                        <img style="height: 50px"
+                                            src="{{ asset("upload/products/$product->photo") }}"
+                                            alt="{{ $product->product_name }}">
+                                    </td>
+                                    <td>{{ $product->product_name }}</td>
+                                    <td>{{ $cart->quantity }}</td>
+                                    <td>$ {{ $cart->price }}</td>
+                                </tr>
+                            @endforeach
+                            <tr>
+                                <td colspan="2">Total</td>
+                                <td> {{ $totalproduct }}</td>
+                                <td> ${{ $price }}</td>
+                            </tr>
+                        </table>
+
+
+                        <div class=" d-flex justify-content-between">
+                            <div class="cashondelivery">
+                                <h3>Payment Method:</h3>
+                                <p class="m-0 p-0" for="payment_method" style="vertical-align: middle"><input
+                                        style="vertical-align: middle" type="radio" name="payment_method" checked
+                                        id=""> Cash on Delivery</p>
+                            </div>
+                            <div class="col-md-5">
+                                    <div class="d-flex justify-content-between">
+                                        <p class="m-0 p-0">Total Price:</p>
+                                        <p class="m-0 p-0">$ {{ $price }}</p>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <p class="m-0 p-0">Total Discount:</p>
+                                        <p class="m-0 p-0"> $ 0.00</p>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <p class="m-0 p-0">Shipping Charge:</p>
+                                        <p class="m-0 p-0"> $ 50 .00</p>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <p class="m-0 p-0">Delivery Charge:</p>
+                                        <p class="m-0 p-0"> $ 50 .00</p>
+                                    </div>
+                                    <hr class="mt-1 mb-1">
+                                    <div class="d-flex justify-content-between">
+                                        <p class="m-0 p-0">Total:</p>
+                                        <p class="m-0 p-0">$ {{ $price+100 }}</p>
+                                    </div>
+                                    <a href="{{ route('placeorder') }}" class="mt-4 btn btn-warning rounded-0 form-control">Place Order</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
 
         <!-- footer section start -->
         <div class="footer_section layout_padding">
@@ -188,7 +323,9 @@
         <!-- copyright section start -->
         <div class="copyright_section">
             <div class="container">
-                <p class="copyright_text">© 2020 All Rights Reserved.</p>
+                <p class="copyright_text">© 2020 All Rights Reserved. Design by <a href="https://html.design">Free
+                        html
+                        Templates</a></p>
             </div>
         </div>
         <!-- copyright section end -->

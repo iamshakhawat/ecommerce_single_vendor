@@ -81,7 +81,7 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="logo">
-                            <a href="index.html">
+                            <a href="{{ route('homepage') }}">
                                 <img src="{{ asset('frontend/images/logo.png') }}" />
                             </a>
                         </div>
@@ -159,7 +159,28 @@
         </div>
         <!-- header section end -->
 
-        @yield('content')
+        <div class="container">
+            <div class="row p-5 my-5">
+                <div class="col-md-2 box_main">
+                    <ul>
+                        <li><a href="{{ route('userdashboard') }}">Dashboard</a></li>
+                        <li><a href="{{ route('cart') }}">Cart</a></li>
+                        <li><a href="{{ route('orderpending') }}">Pending Orders</a></li>
+                        <li><a href="{{ route('addressbook') }}">Address Book</a></li>
+                        <li><a href="{{ route('orderhistory') }}">History</a></li>
+                        <li><a href="{{ route('userprofile') }}">Profile</a></li>
+                        <li><a href="{{ route('changepassword') }}">Change Password</a></li>
+                        <li><a href="{{ route('userlogout') }}">Logout</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-10 ">
+                    <div class="box_main">
+                        @yield('content')
+                    </div>
+                </div>
+            </div>
+
+        </div>
 
         <!-- footer section start -->
         <div class="footer_section layout_padding">
@@ -188,7 +209,9 @@
         <!-- copyright section start -->
         <div class="copyright_section">
             <div class="container">
-                <p class="copyright_text">© 2020 All Rights Reserved.</p>
+                <p class="copyright_text">© 2020 All Rights Reserved. Design by <a href="https://html.design">Free
+                        html
+                        Templates</a></p>
             </div>
         </div>
         <!-- copyright section end -->
@@ -220,3 +243,5 @@
 </body>
 
 </html>
+
+

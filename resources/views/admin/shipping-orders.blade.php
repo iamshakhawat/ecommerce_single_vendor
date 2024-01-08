@@ -1,12 +1,12 @@
 @extends('admin.layouts.main')
-@section('title', 'Cancel Orders')
+@section('title', 'Shipping Orders')
 @section('content')
     <div class="row">
         <!-- Basic Layout -->
         <div class="col-xxl">
             <div class="card mb-4">
                 <div class="card-header d-flex align-items-center justify-content-between">
-                    <h5 class="mb-0">Cancel Orders <span class="">({{ count($orders) }})</span></h5>
+                    <h5 class="mb-0">Shipping Orders <span class="">({{ count($orders) }})</span></h5>
                 </div>
                 <div class="card-body">
                     @if (count($orders) > 0)
@@ -16,6 +16,7 @@
                                     <td>#</td>
                                     <td>Order</td>
                                     <td>Status</td>
+                                    <td>Action</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -52,7 +53,10 @@
                                             </table>
                                         </td>
                                         <td>
-                                            <span class="text-white bg-danger p-1 rounded-1 px-2">{{ $order->status }}ed</span>
+                                            <span class="text-white bg-info p-1 rounded-1 px-2">{{ $order->status }}</span>
+                                        </td>
+                                        <td>
+                                                <a href="{{ route('completeorder',$order->id) }}" class="btn btn-sm btn-success"><i class=" bx bx-check"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

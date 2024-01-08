@@ -30,6 +30,7 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        date_default_timezone_set('Asia/Dhaka');
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
@@ -40,8 +41,9 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'created_at' => date('Y-m-d H:i:m'),
         ]);
-        $user->addRole('user'); 
+        $user->addRole('user');
         event(new Registered($user));
 
         Auth::login($user);

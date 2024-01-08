@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
@@ -26,10 +28,23 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
-
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        $id = Auth::id();
+
+        date_default_timezone_set('Asia/Dhaka');
+        User::where('id',$id)->update([
+            'updated_at' => date('Y-m-d H:i:m'),
+        ]);
+        $dbroleid = DB::table('role_user')->where('user_id',$id)->first()->role_id;
+        $url = "";
+
+        if($dbroleid == 1){
+            $url = "/admin/dashboard";
+        }else{
+            $url = "/dashboard";
+        }
+        return redirect()->intended($url);
     }
 
     /**

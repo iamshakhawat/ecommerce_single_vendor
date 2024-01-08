@@ -1,7 +1,7 @@
             <!-- Menu -->
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
                 <div class="app-brand demo">
-                    <a href="index.html" class="app-brand-link">
+                    <a href="{{ route('dashbaord') }}" class="app-brand-link">
                         <span class="app-brand-logo demo">
                             <svg width="25" viewBox="0 0 25 42" version="1.1" xmlns="http://www.w3.org/2000/svg"
                                 xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -59,48 +59,11 @@
 
                 <ul class="menu-inner py-1">
                     <!-- Dashboards -->
-                    <li class="menu-item active">
+                    <li class="menu-item @if (url()->current() == url('/admin/dashboard')) active @endif">
                         <a href="{{ route('dashbaord') }}" class="menu-link ">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Dashboards">Dashboards</div>
-                            <div class="badge bg-danger rounded-pill ms-auto">5</div>
                         </a>
-                    </li>
-
-                    <!-- Layouts -->
-                    <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-layout"></i>
-                            <div data-i18n="Layouts">Layouts</div>
-                        </a>
-
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="layouts-without-menu.html" class="menu-link">
-                                    <div data-i18n="Without menu">Without menu</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="layouts-without-navbar.html" class="menu-link">
-                                    <div data-i18n="Without navbar">Without navbar</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="layouts-container.html" class="menu-link">
-                                    <div data-i18n="Container">Container</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="layouts-fluid.html" class="menu-link">
-                                    <div data-i18n="Fluid">Fluid</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="layouts-blank.html" class="menu-link">
-                                    <div data-i18n="Blank">Blank</div>
-                                </a>
-                            </li>
-                        </ul>
                     </li>
 
                     <li class="menu-header small text-uppercase">
@@ -108,18 +71,18 @@
                     </li>
 
                     {{-- Category --}}
-                    <li class="menu-item">
+                    <li class="menu-item @if (url()->current() == url('/admin/add-category') || url()->current() == url('/admin/all-category')) open active @endif">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx-list-ul"></i>
                             <div data-i18n="Account Settings">Category</div>
                         </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item">
+                        <ul class="menu-sub ">
+                            <li class="menu-item @if (url()->current() == url('/admin/add-category')) active @endif">
                                 <a href="{{ route('addcategory') }}" class="menu-link">
                                     <div data-i18n="Account">Add Category</div>
                                 </a>
                             </li>
-                            <li class="menu-item">
+                            <li class="menu-item @if (url()->current() == url('/admin/all-category')) active @endif">
                                 <a href="{{ route('allcategory') }}" class="menu-link">
                                     <div data-i18n="Notifications">All Category</div>
                                 </a>
@@ -129,18 +92,18 @@
 
 
                     {{-- Sub Category --}}
-                    <li class="menu-item">
+                    <li class="menu-item @if (url()->current() == url('/admin/add-subcategory') || url()->current() == url('/admin/all-subcategory')) open active @endif">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx-chevron-right"></i>
                             <div data-i18n="Account Settings">Sub Category</div>
                         </a>
                         <ul class="menu-sub">
-                            <li class="menu-item">
+                            <li class="menu-item @if (url()->current() == url('/admin/add-subcategory')) active @endif">
                                 <a href="{{ route('addsubcategory') }}" class="menu-link">
                                     <div data-i18n="Account">Add Sub Category</div>
                                 </a>
                             </li>
-                            <li class="menu-item">
+                            <li class="menu-item @if (url()->current() == url('/admin/all-subcategory')) active @endif">
                                 <a href="{{ route('allsubcategory') }}" class="menu-link">
                                     <div data-i18n="Notifications">All Sub Category</div>
                                 </a>
@@ -149,18 +112,18 @@
                     </li>
 
                     {{-- Product --}}
-                    <li class="menu-item">
+                    <li class="menu-item @if (url()->current() == url('/admin/add-product') || url()->current() == url('/admin/all-product')) open active @endif">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bxl-product-hunt"></i>
                             <div data-i18n="Account Settings">Product</div>
                         </a>
                         <ul class="menu-sub">
-                            <li class="menu-item">
+                            <li class="menu-item @if (url()->current() == url('/admin/add-product') ) active @endif">
                                 <a href="{{ route('addproduct') }}" class="menu-link">
                                     <div data-i18n="Account">Add Product</div>
                                 </a>
                             </li>
-                            <li class="menu-item">
+                            <li class="menu-item @if (url()->current() == url('/admin/all-product')) active @endif">
                                 <a href="{{ route('allproduct') }}" class="menu-link">
                                     <div data-i18n="Notifications">All Product</div>
                                 </a>
@@ -169,223 +132,91 @@
                     </li>
 
                     {{-- Order --}}
-                    <li class="menu-item">
+                    <li class="menu-item @if (url()->current() == url('/admin/pending-orders') || url()->current() == url('/admin/confirm-orders') || url()->current() == url('/admin/shipping-orders') || url()->current() == url('/admin/complete-orders') || url()->current() == url('/admin/cancel-orders')) open active @endif">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx-cart-alt"></i>
                             <div data-i18n="Account Settings">Orders</div>
                         </a>
                         <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="{{ route('pendingorders') }}" class="menu-link">
-                                    <div data-i18n="Account">Pending Orders</div>
+                            <li class="menu-item @if (url()->current() == url('/admin/pending-orders')) active @endif">
+                                <a href="{{ route('pendingorders') }}" class="menu-link ">
+                                    <i class="menu-icon tf-icons bx bx-timer"></i>
+                                    <div data-i18n="Dashboards">Pending Orders</div>
+                                    @php
+                                        $pendigorders = App\Models\Order::where('status','Pending')->get();
+                                    @endphp
+                                    @if (count($pendigorders) > 0)
+                                        <div class="badge bg-danger rounded-pill ms-auto">{{ count($pendigorders) }}</div>
+                                    @endif
                                 </a>
                             </li>
-                            <li class="menu-item">
-                                <a href="{{ route('completedorders') }}" class="menu-link">
-                                    <div data-i18n="Notifications">Completed Orders</div>
+                            <li class="menu-item @if ( url()->current() == url('/admin/confirm-orders') )  active @endif">
+                                <a href="{{ route('confirmorders') }}" class="menu-link ">
+                                    <i class="menu-icon tf-icons bx bx-check"></i>
+                                    <div data-i18n="Dashboards">Confirm Orders</div>
+                                    @php
+                                    $confirms = App\Models\Order::where('status','Confirm')->get();
+                                @endphp
+                                @if (count($confirms) > 0)
+                                    <div class="badge bg-danger rounded-pill ms-auto">{{ count($confirms) }}</div>
+                                @endif
                                 </a>
                             </li>
-                            <li class="menu-item">
-                                <a href="{{ route('cancelorders') }}" class="menu-link">
-                                    <div data-i18n="Notifications">Cancel Orders</div>
+                            <li class="menu-item @if (url()->current() == url('/admin/shipping-orders')) active @endif">
+                                <a href="{{ route('shippingorders') }}" class="menu-link ">
+                                    <i class="menu-icon tf-icons bx bx-box"></i>
+                                    <div data-i18n="Dashboards">Shipping Orders</div>
+                                    @php
+                                    $shippings = App\Models\Order::where('status','Shipping')->get();
+                                @endphp
+                                @if (count($shippings) > 0)
+                                    <div class="badge bg-danger rounded-pill ms-auto">{{ count($shippings) }}</div>
+                                @endif
+                                </a>
+                            </li>
+                            <li class="menu-item @if (url()->current() == url('/admin/complete-orders'))  active @endif">
+                                <a href="{{ route('completeorders') }}" class="menu-link ">
+                                    <i class="menu-icon tf-icons bx bx-happy"></i>
+                                    <div data-i18n="Dashboards">Complete Orders</div>
+                                </a>
+                            </li>
+
+                            <li class="menu-item @if (url()->current() == url('/admin/cancel-orders')) active @endif">
+                                <a href="{{ route('cancelorders') }}" class="menu-link ">
+                                    <i class="menu-icon tf-icons bx bx-x"></i>
+                                    <div data-i18n="Dashboards">Cancel Orders</div>
                                 </a>
                             </li>
                         </ul>
                     </li>
 
+                    <li class="menu-header small text-uppercase"><span class="menu-header-text">User Account</span></li>
 
-                    <!-- Components -->
-                    <li class="menu-header small text-uppercase"><span class="menu-header-text">Components</span></li>
-                    <!-- Cards -->
-                    <li class="menu-item">
-                        <a href="cards-basic.html" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-collection"></i>
-                            <div data-i18n="Basic">Cards</div>
-                        </a>
-                    </li>
-                    <!-- User interface -->
-                    <li class="menu-item">
-                        <a href="javascript:void(0)" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-box"></i>
-                            <div data-i18n="User interface">User interface</div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="ui-accordion.html" class="menu-link">
-                                    <div data-i18n="Accordion">Accordion</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="ui-alerts.html" class="menu-link">
-                                    <div data-i18n="Alerts">Alerts</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="ui-badges.html" class="menu-link">
-                                    <div data-i18n="Badges">Badges</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="ui-buttons.html" class="menu-link">
-                                    <div data-i18n="Buttons">Buttons</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="ui-carousel.html" class="menu-link">
-                                    <div data-i18n="Carousel">Carousel</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="ui-collapse.html" class="menu-link">
-                                    <div data-i18n="Collapse">Collapse</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="ui-dropdowns.html" class="menu-link">
-                                    <div data-i18n="Dropdowns">Dropdowns</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="ui-footer.html" class="menu-link">
-                                    <div data-i18n="Footer">Footer</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="ui-list-groups.html" class="menu-link">
-                                    <div data-i18n="List Groups">List groups</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="ui-modals.html" class="menu-link">
-                                    <div data-i18n="Modals">Modals</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="ui-navbar.html" class="menu-link">
-                                    <div data-i18n="Navbar">Navbar</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="ui-offcanvas.html" class="menu-link">
-                                    <div data-i18n="Offcanvas">Offcanvas</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="ui-pagination-breadcrumbs.html" class="menu-link">
-                                    <div data-i18n="Pagination &amp; Breadcrumbs">Pagination &amp; Breadcrumbs</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="ui-progress.html" class="menu-link">
-                                    <div data-i18n="Progress">Progress</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="ui-spinners.html" class="menu-link">
-                                    <div data-i18n="Spinners">Spinners</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="ui-tabs-pills.html" class="menu-link">
-                                    <div data-i18n="Tabs &amp; Pills">Tabs &amp; Pills</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="ui-toasts.html" class="menu-link">
-                                    <div data-i18n="Toasts">Toasts</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="ui-tooltips-popovers.html" class="menu-link">
-                                    <div data-i18n="Tooltips & Popovers">Tooltips &amp; popovers</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="ui-typography.html" class="menu-link">
-                                    <div data-i18n="Typography">Typography</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <!-- Extended components -->
-                    <li class="menu-item">
-                        <a href="javascript:void(0)" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-copy"></i>
-                            <div data-i18n="Extended UI">Extended UI</div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="extended-ui-perfect-scrollbar.html" class="menu-link">
-                                    <div data-i18n="Perfect Scrollbar">Perfect scrollbar</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="extended-ui-text-divider.html" class="menu-link">
-                                    <div data-i18n="Text Divider">Text Divider</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li class="menu-item">
-                        <a href="icons-boxicons.html" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-crown"></i>
-                            <div data-i18n="Boxicons">Boxicons</div>
-                        </a>
-                    </li>
-
-                    <!-- Forms & Tables -->
-                    <li class="menu-header small text-uppercase"><span class="menu-header-text">Forms &amp;
-                            Tables</span></li>
-                    <!-- Forms -->
-                    <li class="menu-item">
+                    <li class="menu-item @if (url()->current() == url('/admin/profile') || url()->current() == url('/admin/change-password')) open active @endif">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx-detail"></i>
-                            <div data-i18n="Form Elements">Form Elements</div>
+                            <div data-i18n="Form Elements">{{ Auth::user()->name }}</div>
                         </a>
                         <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="forms-basic-inputs.html" class="menu-link">
-                                    <div data-i18n="Basic Inputs">Basic Inputs</div>
+                            <li class="menu-item @if (url()->current() == url('/admin/profile') ) active @endif" >
+                                <a href="{{ route('adminprofile') }}" class="menu-link">
+                                    <div data-i18n="Basic Inputs">Profile</div>
+                                </a>
+                            </li>
+                            <li class="menu-item @if (url()->current() == url('/admin/change-password')) active @endif">
+                                <a href="{{ route('adminchangepassword') }}" class="menu-link">
+                                    <div data-i18n="Basic Inputs">Change Password</div>
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="forms-input-groups.html" class="menu-link">
-                                    <div data-i18n="Input groups">Input groups</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="menu-item">
-                        <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class="menu-icon tf-icons bx bx-detail"></i>
-                            <div data-i18n="Form Layouts">Form Layouts</div>
-                        </a>
-                        <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="form-layouts-vertical.html" class="menu-link">
-                                    <div data-i18n="Vertical Form">Vertical Form</div>
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="form-layouts-horizontal.html" class="menu-link">
-                                    <div data-i18n="Horizontal Form">Horizontal Form</div>
+                                <a href="{{ route('adminlogout') }}" class="menu-link">
+                                    <div data-i18n="Input groups">Logout</div>
                                 </a>
                             </li>
                         </ul>
                     </li>
 
-                    <!-- Tables -->
-                    <li class="menu-item">
-                        <a href="tables-basic.html" class="menu-link">
-                            <i class="menu-icon tf-icons bx bx-table"></i>
-                            <div data-i18n="Tables">Tables</div>
-                        </a>
-                    </li>
 
-                    <!-- Misc -->
-                    <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
                 </ul>
             </aside>
             <!-- / Menu -->
